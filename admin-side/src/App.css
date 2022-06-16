@@ -1,0 +1,20 @@
+.container1{
+    display: flex;
+}
+
+.other{
+    flex: 4;
+}
+
+.icon-delete{
+    color: brown;
+    cursor: pointer;
+}
+
+
+.error-handle{
+    color: #a32e1c;
+    text-align: center;
+    background-color: #ffbab0;
+    padding: 10px;
+}
