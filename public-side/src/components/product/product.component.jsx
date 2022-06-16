@@ -15,8 +15,9 @@ function Product() {
 
     return (
         <div className="container" style={{marginTop:'150px',marginBottom:'50px'}}>
+            <div className="title">Our products</div>
             <div>
-           <p>Up-tech offers its producer customers a range of diversified essential products 
+           <p className='intro'>Up-tech offers its producer customers a range of diversified essential products 
                including foods of all ages, sanitary products and certain basic equipment. 
                It also offers its customers quality, fresh and valuable chickens and eggs from the farm.</p> 
             </div>

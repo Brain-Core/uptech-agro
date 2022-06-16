@@ -3,13 +3,16 @@
     margin: 5px;
     transition: transform .3s ease;
     cursor: pointer;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(173, 173, 173, 0.5);
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 .card-body > p{
     min-height: 15px;
-    background-color: #16ABEC;
-    color: #ffffff;
-    text-align: center;
+    color: black;
+    text-align: left;
     line-height: 2.5rem;
 }
 
