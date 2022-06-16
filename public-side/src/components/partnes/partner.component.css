@@ -1,0 +1,11 @@
+.patner{
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+}
+
+.patner__center{
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
