@@ -20,9 +20,10 @@ function Team() {
             marginBottom:'299px'
         }}
         className="container"
+        id='team'
         >
-            <h1 className="text-center mb-4">Our Team</h1>
-            <div className="row">
+            <h1 className="title">Our Team</h1>
+            <div className="items">
                 {teams?.map((team, i)=>(
                     <TeamItem
                     key={i}

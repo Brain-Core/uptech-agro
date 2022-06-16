@@ -12,15 +12,16 @@ import Contact from './components/contact/contact.component';
 function App() {
   return (
     <div className="App">
-      <Router>
+      {/* <Router> */}
         <HeaderTop/>
-        <Route exact path="/" component={Home}/>
+        <Home />
+        {/* <Route exact path="/" component={Home}/>
         <Route exact path="/product" component={Product}/>
         <Route exact path="/impact" component={Impact}/>
         <Route exact path="/team" component={Team}/>
-        <Route exact path="/contact" component={Contact}/>
+        <Route exact path="/contact" component={Contact}/> */}
         <Footer/>
-      </Router>
+      {/* </Router> */}
     </div>
   );
 }

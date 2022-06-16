@@ -1,0 +1,11 @@
+.items{
+    display: flex;
+}
+.team-item{
+    border: 1px solid #e6e6e6;
+    border-radius: 10px;
+    padding: 10px;
+}
+.team-item:not(:last-of-type){
+    margin-right: 1rem;
+}

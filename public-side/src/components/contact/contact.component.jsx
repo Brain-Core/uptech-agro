@@ -4,9 +4,9 @@ import './contact.component.css';
 
 function Contact() {
     return (
-        <div className="col-md-7 m-auto contact" >
-            <h1 className="text-center m-4">Contact Us</h1>
-        <div className="card card-body m-auto">
+        <div className="contact bg-light" id='contact'>
+            <h1 className="title">Contact Us</h1>
+        <div className="">
             <form className="form">
                 <div className="form-group">
                     <input type="text" name="name"  placeholder="FullName" className="form-control rounded"/>

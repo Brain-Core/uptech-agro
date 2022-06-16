@@ -12,8 +12,8 @@ function Impact() {
             marginBottom:'30px',
             marginLeft:'40px',
             marginRight:'50px'
-            }} className="">
-          <h1 className="text-center" style={{
+            }} className="impact" id='impact'>
+          <h1 className="title" id='impact' style={{
               marginBottom:'30px'
           }}>Our Impacts</h1> 
           <div className="row" style={{

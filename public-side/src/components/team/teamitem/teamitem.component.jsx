@@ -2,7 +2,7 @@ import React from 'react'
 
 function TeamItem({img,name,position}) {
     return (
-        <div className="col-xs-6 col-md-4 mt-4 text-center" style={{margin: '0 auto'}}>
+        <div className="col-xs-6 col-md-4 mt-4 text-center team-item">
             <img
             style={{
                 width:'50%'

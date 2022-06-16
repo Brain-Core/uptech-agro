@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
 import './navbar.component.css';
 
 
@@ -7,31 +6,31 @@ function NavBar() {
     return (
         <nav className="navbar navbar-expand-lg navbar-light">
         <div className="container-fluid">
-            <Link className="navbar-brand" to="#">
-            </Link>
+            <a className="navbar-brand" href="#home">
+            </a>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul className="navbar-nav">
                 <li className="nav-item">
-                <Link className="nav-link text-light font-weight-bold active" aria-current="page" to="/">Home</Link>
+                <a className="nav-link text-light font-weight-bold active" aria-current="page" href="#home">Home</a>
                 </li>
                 <li className="nav-item">
-                <Link className="nav-link text-light font-weight-bold" to="/product">Products</Link>
+                <a className="nav-link text-light font-weight-bold" href="#product">Products</a>
                 </li>
                 <li className="nav-item">
-                <Link className="nav-link text-light font-weight-bold" to="/impact">Impacts</Link>
+                <a className="nav-link text-light font-weight-bold" href="#impact">Impacts</a>
                 </li>
                 <li className="nav-item">
-                <Link className="nav-link text-light font-weight-bold" to="/team">OurTeam</Link>
+                <a className="nav-link text-light font-weight-bold" href="#team">OurTeam</a>
                 </li>
                 <li className="nav-item">
-                <Link className="nav-link text-light font-weight-bold" to="/contact">Contact Us</Link>
+                <a className="nav-link text-light font-weight-bold" href="#contact">Contact Us</a>
                 </li>
                 <li className="nav-item">
-                <Link className="ml-2 btn btn-primary  rounded text-light font-weight-bold" 
-                to={{ pathname: "https://uptech-admin.herokuapp.com/"}} target="_blank">Sign in</Link>
+                <a className="ml-2 btn btn-primary  rounded text-light font-weight-bold" 
+                href="https://uptech-admin.herokuapp.com/" target="_blank" rel='noreferrer'>Sign in</a>
                 </li>
             </ul>
             </div>

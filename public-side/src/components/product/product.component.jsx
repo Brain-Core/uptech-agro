@@ -14,7 +14,7 @@ function Product() {
     }, [])
 
     return (
-        <div className="container" style={{marginTop:'150px',marginBottom:'50px'}}>
+        <div className="container" style={{marginTop:'150px',marginBottom:'50px'}} id='product'>
             <div className="title">Our products</div>
             <div>
            <p className='intro'>Up-tech offers its producer customers a range of diversified essential products 

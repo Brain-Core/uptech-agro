@@ -15,8 +15,8 @@ function Partner() {
 
 
     return (
-        <div className="patner">
-            <h1 className="text-center">Our Patners</h1>
+        <div className="patner" id='partner'>
+            <h1 className="title">Our Patners</h1>
             <div className="container patner__center">
                 <div className="row"> 
                         

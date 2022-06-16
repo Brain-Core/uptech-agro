@@ -1,12 +1,7 @@
 .contact{
     margin-top: 12rem !important;
-    margin-bottom: 8rem !important;
-    
-}
-
-.card{
-    background-color: #16ABEC !important;
-    width: 70% !important;
+    padding: 20px 200px;
+    margin-bottom: -20px;
 }
 
 

@@ -2,7 +2,7 @@ import React from 'react'
 
 function ImpactItem({img,title, paragraph}) {
     return (
-        <div className="col-md-14 mt-4">
+        <div className="col-md-14 mt-4 mb-5">
             <div className="row">
                 <div className="col-md-2">
                     <img 
