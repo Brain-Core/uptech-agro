@@ -1,0 +1,9 @@
+/* .carousel-item > img{
+    height: 432px !important; 
+    object-fit: contain !important;
+ } */
+
+
+ .d-block{
+    object-fit: contain !important;
+}

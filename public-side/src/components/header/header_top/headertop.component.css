@@ -1,0 +1,32 @@
+.header__top{
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+}
+
+
+.header__img{
+    width: 140px;
+    object-fit: contain;
+}
+
+.header__top > p{
+    margin-top: 13px;
+}
+
+.header__mail{
+    color:#16ABEC;
+    cursor: pointer;  
+}
+
+@media (min-width: 320px) and (max-width: 580px) {
+    .header__phone, .header__mail{
+        font-size: small;
+    }
+
+    .header__img{
+        height: 50px;
+        object-fit: contain;
+    }
+}

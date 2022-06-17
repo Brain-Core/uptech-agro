@@ -1,0 +1,58 @@
+.footer{
+    width: 100%;
+    padding: 15px;
+    margin-top: -50px !important;
+}
+
+.bg-blue{
+    background-color: #16ABEC !important;
+}
+
+
+.footer__contactPhoneAndMail .footer__contactCookies{
+    text-align: left;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+
+
+.footer__link{
+    color: #fff;
+    text-decoration: none;
+    list-style: none;
+    font-size: small;
+}
+
+.footer__link:hover{
+    color: #b8b3b3 ;
+}
+
+.bar{
+    color: white;
+}
+
+
+
+
+.footer__social{
+    text-align: right;
+}
+
+.footer__socialMedioLink{
+    margin-right: 5px;
+}
+
+.footer__socialMedia1{
+    margin-bottom: 10px;
+}
+
+@media (min-width: 320px) and (max-width: 580px) {
+    .footer{
+        padding: 20px;
+        display: flex;
+        flex-direction: row;
+    }
+}
+
