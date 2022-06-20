@@ -21,3 +21,12 @@ code {
 .ajust{
   padding: 0 200px;
 }
+
+@media screen and (max-width: 768px) {
+  .ajust{
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

@@ -1,6 +1,6 @@
 .contact{
-    margin-top: 12rem !important;
-    padding-top: 20ox;
+    margin-top: 100px !important;
+    padding-top: 20px;
     padding-bottom: 20px;
     margin-bottom: -20px;
 }
@@ -8,4 +8,10 @@
 
 .btn{
     color: #16ABEC !important;
+}
+
+@media screen and (max-width: 768px) {
+    .form{
+        width: 300px;
+    }
 }
