@@ -5,10 +5,10 @@ import img2 from '../../../assets/home3.jpg';
 import img3 from '../../../assets/image2.jpg';
 
 function Banner() {
-  const banner = document.querySelector('.banner');
   const imgs = [img1, img2, img3];
 
   useEffect(() =>{
+    const banner = document.querySelector('.banner');
     let index = 1;
     let interval = setInterval(() => {
       index++;
@@ -23,7 +23,8 @@ function Banner() {
     return () => {
       clearInterval(interval);
     }
-  })
+  }, [Math.random()]);
+
     return (
       <div className='banner'>
         <div className="content">
