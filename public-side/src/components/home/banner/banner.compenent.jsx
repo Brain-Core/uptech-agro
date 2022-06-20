@@ -1,8 +1,29 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './banner.component.css';
-
+import img1 from '../../../assets/home1.jpg';
+import img2 from '../../../assets/home3.jpg';
+import img3 from '../../../assets/image2.jpg';
 
 function Banner() {
+  const banner = document.querySelector('.banner');
+  const imgs = [img1, img2, img3];
+
+  useEffect(() =>{
+    let index = 1;
+    let interval = setInterval(() => {
+      index++;
+      if(index > 3){
+        index = 1;
+      };
+      if(banner){
+        banner.style.backgroundImage = `url(${imgs[index-1]})`;
+      }
+    }, 5000);
+
+    return () => {
+      clearInterval(interval);
+    }
+  })
     return (
       <div className='banner'>
         <div className="content">

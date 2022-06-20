@@ -8,6 +8,7 @@
     padding: 0 200px;
     padding-top: 100px;
     color: white;
+    transition: all 0.5s ease-in-out;
 }
 .banner::before{
     content: '';
