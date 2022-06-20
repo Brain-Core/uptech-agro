@@ -16,10 +16,9 @@ function Team() {
 
     return (
         <div style={{
-            marginTop:'160px',
-            marginBottom:'299px'
+            marginTop:'100px',
         }}
-        className="container"
+        className="ajust"
         id='team'
         >
             <h1 className="title">Our Team</h1>

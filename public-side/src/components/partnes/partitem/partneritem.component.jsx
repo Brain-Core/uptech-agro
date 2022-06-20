@@ -3,7 +3,7 @@ import './partneritem.component.css';
 
 function PartnerItem({img}) {
     return (
-        <div className="mt-4">
+        <div className="mt-4 partner-item">
             
             <img 
             alt="..."
