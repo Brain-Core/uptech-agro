@@ -8,11 +8,8 @@ import health from '../../assets/health.png'
 function Impact() {
     return (
         <div style={{
-            marginTop:'150px', 
-            marginBottom:'30px',
-            marginLeft:'40px',
-            marginRight:'50px'
-            }} className="impact" id='impact'>
+            marginTop:'100px',
+            }} className="ajust" id='impact'>
           <h1 className="title" id='impact' style={{
               marginBottom:'30px'
           }}>Our Impacts</h1> 

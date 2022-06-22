@@ -4,7 +4,7 @@ import './contact.component.css';
 
 function Contact() {
     return (
-        <div className="contact bg-light" id='contact'>
+        <div className="ajust contact bg-light" id='contact'>
             <h1 className="title">Contact Us</h1>
         <div className="">
             <form className="form">

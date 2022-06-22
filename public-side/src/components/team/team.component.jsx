@@ -15,11 +15,8 @@ function Team() {
     }, []) 
 
     return (
-        <div style={{
-            marginTop:'160px',
-            marginBottom:'299px'
-        }}
-        className="container"
+        <div
+        className="ajust team"
         id='team'
         >
             <h1 className="title">Our Team</h1>

@@ -2,14 +2,14 @@ import React from 'react'
 
 function ImpactItem({img,title, paragraph}) {
     return (
-        <div className="col-md-14 mt-4 mb-5">
-            <div className="row">
-                <div className="col-md-2">
+        <div className="mt-4 mb-5 pl-3">
+            <div className="impact-item">
+                <div className="block-img">
                     <img 
                     src={img} 
                     alt=""/>
                 </div>
-                <div className="col-md-8">
+                <div className="block-descript">
                     <h3 className="font-weight-bold">{title}</h3>
                     <p>
                         {paragraph}

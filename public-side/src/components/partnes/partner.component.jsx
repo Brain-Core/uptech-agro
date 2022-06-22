@@ -15,10 +15,10 @@ function Partner() {
 
 
     return (
-        <div className="patner" id='partner'>
+        <div className="ajust patner" id='partner'>
             <h1 className="title">Our Patners</h1>
-            <div className="container patner__center">
-                <div className="row"> 
+            <div className="">
+                <div className="row pl-3"> 
                         
                     {partners.map((partner, i)=>(
                         <PartnerItem
