@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import { useGetProductQuery, useDeleteProductMutation } from '../../slices/productSlice';
-import Table from '../table/Table';
+import {Table} from 'antd';
 
 function Product() {
 
@@ -12,28 +12,30 @@ function Product() {
 
     const columns = [
         {
-            field:'id',
-            headerName:'ID',
+            dataIndex:'_id',
+            title:'ID',
             width:200
         },
         {
-            field:'namep',
-            headerName:'Name',
+            dataIndex:'namep',
+            title:'Name',
             width:200
         },
         {
-            field:'photo',
-            headerName:'Image',
+            title:'Image',
             width: 200,
-            renderCell: (params:any)=>(
+            render: (row:any)=>(
                 <div className="m-1">
-                    <img style={{ borderRadius:'50%'}} src={params.row.photo} width={50} height={50}/>
+                    <img style={{ borderRadius:'50%'}} src={
+                        row.photo.startsWith('http') ? row.photo:
+                        `https://uptech-agro.herokuapp.com/${row.photo}`
+                    } width={50} height={50}/>
                 </div>
             )
         },
         {
-            field:'',
-            headerName:'*',
+            dataIndex:'',
+            title:'*',
             renderCell:(params:any)=>(
                 <div>
                     <Link to={`/editproduct/${params.row.id}`}>
@@ -54,7 +56,7 @@ function Product() {
                 </div>
                 <Table
                     columns={columns}
-                    data={data}
+                    dataSource={data}
                 />
             </div>
 
