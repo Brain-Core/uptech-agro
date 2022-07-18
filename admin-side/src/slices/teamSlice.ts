@@ -4,14 +4,14 @@ import { ITeam } from '../interfaces/ITeam';
 
 export const teamApi = createApi({
     reducerPath:'team',
-    baseQuery: fetchBaseQuery({baseUrl:'http://localhost:3030'}),
+    baseQuery: fetchBaseQuery({baseUrl:'https://uptech-agro.herokuapp.com/api/team'}),
     tagTypes:['ITeam'],
     endpoints: (build) => ({
         // FETCH ALL THE TEAM MEMBERS 
         getTeams: build.query<ITeam[], string | void>({
             query(){
                 return{
-                    url:'/teams'
+                    url:'/'
                 }
             },
             providesTags: (result) =>
@@ -28,7 +28,7 @@ export const teamApi = createApi({
         addTeam: build.mutation<ITeam, FormData>({
             query(body){
                 return {
-                    url:'/teams/post',
+                    url:'/',
                     method:'POST',
                     body
                 }
@@ -39,7 +39,7 @@ export const teamApi = createApi({
         getTeam: build.query<ITeam, string>({
             query(_id: string){
                 return{
-                    url:`/teams/${_id}`
+                    url:`/${_id}`
                 }
             }
         }),
@@ -47,7 +47,7 @@ export const teamApi = createApi({
         deleteTeam: build.mutation<{success:boolean, id:string}, string>({
             query(id){
                 return{
-                    url:`/teams/delete/${id}`,
+                    url:`/delete/${id}`,
                     method:'DELETE'
                 }
             },

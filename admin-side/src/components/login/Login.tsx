@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from 'react'
-import {Grid, Paper, Button, TextField} from '@material-ui/core';
+import {Grid, Paper, TextField} from '@material-ui/core';
 // import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { useHistory } from 'react-router-dom';
 import axios, { AxiosRequestConfig } from 'axios';
+import { useLoginUserMutation } from '../../slices/userSlice';
+import { Button } from 'antd';
 
 
 const paperStyle = {
@@ -24,14 +26,34 @@ const avatarStyle = {
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
     const history = useHistory();
+    const [loginuser, { isLoading, data, isSuccess, isError }] = useLoginUserMutation();
 
     useEffect(()=>{
         if(localStorage.getItem("authToken")){
             history.push('/')
         }
-    },[])
+    },[]);
+
+
+    const onSubmit = (e: React.FormEvent) =>{
+        e.preventDefault();
+        if(email && password){
+            loginuser({
+                email,
+                password
+            })
+        }
+    };
+
+    useEffect(() =>{
+        (() =>{
+            if(isSuccess){
+                localStorage.setItem("authToken", data?.token || '');
+                history.push('/')
+            }
+        })()
+    }, [isSuccess, data, history]);
 
 
     return (
@@ -42,37 +64,9 @@ function Login() {
                     <h3 className='text-primary font-weight-bold'>ADMIN</h3>
                 </Grid>
             <form
-            onSubmit={async (e)=>{
-                e.preventDefault();
-                const config:AxiosRequestConfig = {
-                    headers:{
-                        "Content-type":"application/json"
-                    }
-                }
-
-                try{
-                    if(!email || !password ){
-                        setError("Please fill Email and Password")
-                    } else {
-                        const { data } = await axios.post("http://localhost:3030/auth/login",{
-                        email,
-                        password
-                        }, config);
-
-                        localStorage.setItem("authToken", data.accessToken);
-                        history.push('/')
-                        setEmail("")
-                        setPassword("")
-                    }
-                    
-
-                }catch(error:any){
-                    setError(error.response.data.error);
-                    setTimeout(()=> setError(""),5000);
-                }
-            }}
+            onSubmit={onSubmit}
             >
-                {error && <span className="error-handle">{error}</span>}
+                {isError && <span className="error-handle">Someting went wrong with your login</span>}
                <TextField 
                     style={textfieldStyle}
                     type="email" 
@@ -96,7 +90,10 @@ function Login() {
                     style={textfieldStyle}
                 />
                
-               <Button type="submit" style={{marginTop:'20px'}} color="primary" variant="contained" fullWidth>Sign in</Button>
+               <Button type='primary' loading={isLoading} htmlType="submit" block style={{
+                    marginLeft: 10,
+                    marginTop: 20
+               }}>Sign in</Button>
             </form>
             </Paper>
             </Grid>

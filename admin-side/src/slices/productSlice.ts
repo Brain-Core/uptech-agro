@@ -4,13 +4,13 @@ import { IProdcut } from '../interfaces/IProduct';
 
 export const productApi = createApi({
     reducerPath:'product',
-    baseQuery: fetchBaseQuery({baseUrl:'http://localhost:3030'}),
+    baseQuery: fetchBaseQuery({baseUrl:'https://uptech-agro.herokuapp.com'}),
     tagTypes:['IProduct'],
     endpoints: (build) => ({
         getProduct: build.query<IProdcut[], number | void>({
             query(){
                 return {
-                    url: '/products'
+                    url: '/api/products'
                 }
             },
             providesTags: (result) =>
