@@ -1,6 +1,6 @@
 import { Link , useHistory} from 'react-router-dom';
 import { useAddTeamMutation } from '../../slices/teamSlice';
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 function Addteam() {
 
@@ -14,7 +14,7 @@ function Addteam() {
     const history = useHistory();
     
     // call add method
-    const [addMember] = useAddTeamMutation();
+    const [addMember, { isSuccess }] = useAddTeamMutation();
 
     const onChangeImage = (e:any)=> setImage(e.target.files[0])
 
@@ -26,15 +26,22 @@ function Addteam() {
         format.append('email', email);
         format.append('phone', phone);
         format.append('position', position);
-        format.append('avatar', image);
+        format.append('photo', image);
         addMember(format);
-        setCompleteName('');
-        setAddress('');
-        setEmail('');
-        setPosition('');
-        setPhone('');
-        history.push('/');
-    }
+    };
+
+    useEffect(() =>{
+        (() =>{
+            if(isSuccess){
+                setCompleteName('');
+                setAddress('');
+                setEmail('');
+                setPosition('');
+                setPhone('');
+                history.push('/');
+            }
+        })();
+    }, [isSuccess, history]);
 
     
     

@@ -1,6 +1,6 @@
 import { useGetTeamsQuery, useDeleteTeamMutation } from '../../slices/teamSlice';
 import { Link } from 'react-router-dom';
-import Table from '../table/Table';
+import {Table} from 'antd';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 
@@ -10,56 +10,55 @@ function Team() {
     
 
     const columns = [
-        { field: 'id', headerName: 'ID', width: 100 },
         {
-          field: 'completeName',
-          headerName: 'Full name',
+          dataIndex: 'completeName',
+          title: 'Full name',
           width: 180,
           editable: false,
         },
         {
-          field: 'address',
-          headerName: 'Address',
+          dataIndex: 'address',
+          title: 'Address',
           width: 150,
           editable: false,
         },
         {
-          field: 'email',
-          headerName: 'Email',
+          dataIndex: 'email',
+          title: 'Email',
           width: 200,
           editable: false,
         },
         {
-            field: 'phone',
-            headerName: 'Phone Number',
+            dataIndex: 'phone',
+            title: 'Phone Number',
             width: 150,
             editable: false,
         },
         {
-            field: 'position',
-            headerName: 'Position',
+            dataIndex: 'position',
+            title: 'Position',
             width: 120,
             editable: false,
         },
         {
-            field:'avatar',
-            headername: "Avatar",
+            key:'avatar',
+            title: "Avatar",
             width: 120,
-            renderCell: (params:any)=>(
+            render: (params:any)=>(
                 <div>
-                    <img alt="" style={{ borderRadius:'50%'}} src={params.row.avatar} width={50} height={50}/>
+                    <img alt="" style={{ borderRadius:'50%'}} src={params.avatar || `https://uptech-agro.herokuapp.com/${params.photo}`} width={50} height={50}/>
                 </div>
             )
         },
         {
-            field:'',
-            headerName:'*',
-            renderCell:(params:any)=>(
+            dataIndex:'',
+            title:'*',
+            render:(row:any)=>(
                 <div>
-                    <Link to={`/editteam/${params.row.id}`}>
+                    <Link to={`/editteam/${row.id}`}>
                         <EditIcon/>
                     </Link>
-                    <DeleteIcon onClick={()=> deleteTeam(params.row.id)} className="icon-delete"/>
+                    <DeleteIcon onClick={()=> deleteTeam(row.id)} className="icon-delete"/>
                 </div>
             )
         }
@@ -71,7 +70,7 @@ function Team() {
                     <h4>Team</h4>
                     <Link to='/addteam'>Add Member +</Link>
                 </div>
-                <Table data={data} columns={columns}/>
+                <Table dataSource={data} columns={columns}/>
             </div>
         </div>
     )

@@ -30,7 +30,10 @@ export const teamApi = createApi({
                 return {
                     url:'/',
                     method:'POST',
-                    body
+                    body,
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+                    }
                 }
             },
             invalidatesTags: [{type:'ITeam',id:'TEAM'}]
