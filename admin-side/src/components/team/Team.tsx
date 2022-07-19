@@ -5,7 +5,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 
 function Team() {
-    const { data=[] } = useGetTeamsQuery();
+    const { data=[], isLoading } = useGetTeamsQuery();
     const [deleteTeam] = useDeleteTeamMutation();
     
 
@@ -70,7 +70,7 @@ function Team() {
                     <h4>Team</h4>
                     <Link to='/addteam'>Add Member +</Link>
                 </div>
-                <Table dataSource={data} columns={columns}/>
+                <Table dataSource={data} columns={columns} loading={isLoading} />
             </div>
         </div>
     )

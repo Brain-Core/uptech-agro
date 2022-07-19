@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Link, useParams, useHistory } from 'react-router-dom'
-import { useGetImpactQuery } from '../../slices/impactSlice';
+import { useEditImpactMutation, useGetImpactQuery } from '../../slices/impactSlice';
 
 
 function EditImpact() {
@@ -12,6 +12,7 @@ function EditImpact() {
     const { id }: { id: string } = useParams();
 
     const { data, isLoading } = useGetImpactQuery(id);
+    const [editImpact, { isSuccess }] = useEditImpactMutation();
 
     const history = useHistory();
 
@@ -25,19 +26,27 @@ function EditImpact() {
             setTitle(`${data?.title}`)
             setDescription(`${data?.description}`)
         }
-    },[])
+    },[isLoading, data])
 
     const onSubmit = (e:any) => {
         e.preventDefault();
         const format = new FormData();
         format.append('title', title);
         format.append('description', description);
-        format.append('photo', photo);
-        axios.put(`http://localhost/impacts/put/${id}`,format);
-        setTitle('');
-        setDescription('');
-        history.push('/impact')
-    }
+        format.append('_id', id);
+        editImpact(format);
+    };
+
+    useEffect(() => {
+        (() => {
+            if (isSuccess) {
+                setTitle('');
+                setDescription('');
+                setPhoto('');
+                history.push('/impact');
+            }
+        })();
+    }, [isSuccess, history]);
     
 
     return (

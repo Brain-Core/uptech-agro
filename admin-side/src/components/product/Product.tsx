@@ -8,7 +8,7 @@ import {Table} from 'antd';
 function Product() {
 
     const [deteleProduct] = useDeleteProductMutation();
-    const {data=[]} = useGetProductQuery();
+    const {data=[], isLoading} = useGetProductQuery();
 
     const columns = [
         {
@@ -57,6 +57,7 @@ function Product() {
                 <Table
                     columns={columns}
                     dataSource={data}
+                    loading={isLoading}
                 />
             </div>
 
