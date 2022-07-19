@@ -2,46 +2,47 @@ import { Link } from 'react-router-dom'
 import { useGetImpactsQuery,useDeleteImpactMutation } from '../../slices/impactSlice';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
-import Table from '../table/Table';
+import {Table} from 'antd';
 
 function Impact() {
-    const {data=[]} = useGetImpactsQuery();
+    const {data=[], isLoading} = useGetImpactsQuery();
     const [deleteImpact] = useDeleteImpactMutation();
     const columns = [
         {
-            field:'id',
-            headerName:'ID',
+            dataIndex:'id',
+            title:'ID',
             width:100,
         },
         {
-            field:'title',
-            headerName:'Title',
+            dataIndex:'title',
+            title:'Title',
             width: 300
         },
         {
-            field: 'description',
-            headerName: 'Description',
+            dataIndex: 'description',
+            title: 'Description',
             width:200
         },
         {
-            field:'photo',
-            headerName:'Image',
+            title:'Image',
             width:200,
-            renderCell: (params:any) => (
+            render: (row:any) => (
                 <div>
-                    <img style={{borderRadius:'50%'}} height={50} width={50} src={params.row.photo} alt="" />
+                    <img style={{borderRadius:'50%'}} height={50} width={50} src={
+                        row.photo?.startsWith('http') ? row.photo:
+                        `https://uptech-agro.herokuapp.com/${row.photo}`
+                    } alt="" />
                 </div>
             )
         },
         {
-            field:'*',
-            headerName:'*',
-            renderCell: (params:any) => (
+            title:'*',
+            render: (row:any) => (
                 <div>
-                    <Link to={`/editimpact/${params.row.id}`}>
+                    <Link to={`/editimpact/${row._id}`}>
                         <EditIcon/>
                     </Link>
-                    <DeleteIcon onClick={()=> deleteImpact(params.row.id)}  className="icon-delete"/>
+                    <DeleteIcon onClick={()=> deleteImpact(row._id)}  className="icon-delete"/>
                 </div>
             )
         },
@@ -53,7 +54,7 @@ function Impact() {
                     <h3 className="font-weight-bold">Impacts</h3>
                     <Link to='/addimpact'>Add Impact+</Link>
                 </div>
-                <Table columns={columns} data={data} />
+                <Table columns={columns} loading={isLoading} dataSource={data} />
 
             </div>
         </div>

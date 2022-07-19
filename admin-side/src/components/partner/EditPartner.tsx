@@ -1,13 +1,14 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Link, useHistory, useParams } from 'react-router-dom';
-import { useGetPartnerQuery} from '../../slices/partnerSlice';
+import { useEditPartnerMutation, useGetPartnerQuery} from '../../slices/partnerSlice';
 
 function EditPartner() {
     const {id}:{id:string} = useParams();
     const [name, setName] = useState('');
     const [photo, setPhoto] = useState('');
     const {data, isLoading} = useGetPartnerQuery(id);
+    const [editPartner, { isSuccess }] = useEditPartnerMutation();
     const history = useHistory();
 
     const onChangeNamep = (e:any) => setName(e.target.value);
@@ -17,18 +18,24 @@ function EditPartner() {
         if(!isLoading){
             setName(`${data?.name}`);
         }
-    },[])
+    },[isLoading, data]);
 
     const onSubmitPartner = (e:any) => {
         e.preventDefault();
         const format = new FormData();
         format.append('name',name);
-        format.append('logo',photo);
-        axios.put(`http://localhost:3030/partner/edit/${id}`,format);
-        setName('')
-        history.push('/partner')
-        
-    }
+        format.append('_id',id);
+        editPartner(format);  
+    };
+
+    useEffect(() =>{
+        (() =>{
+            if(isSuccess){
+                setName('');
+                history.push('/partner');
+            }
+        })()
+    }, [isSuccess, history]);
 
     return (
         <div className="other">

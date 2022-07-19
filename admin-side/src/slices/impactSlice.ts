@@ -3,13 +3,13 @@ import { Iimpact } from '../interfaces/IImpact';
 
 export const impactApi = createApi({
     reducerPath:'impacts',
-    baseQuery: fetchBaseQuery({baseUrl:'http://localhost:3030'}),
+    baseQuery: fetchBaseQuery({baseUrl:'https://uptech-agro.herokuapp.com/api/impact'}),
     tagTypes:['Impact'],
     endpoints: (build) => ({
         getImpacts: build.query<Iimpact[], string | void>({
             query(){
                 return{
-                    url:'/impacts'
+                    url:'/'
                 }
             },
             providesTags: (result) =>  result ?  [...result.map(({ id }) => ({ type: 'Impact', id } as const)), { type: 'Impact', id: 'impact' }, ]: [{ type: 'Impact', id: 'impact' }],
@@ -17,7 +17,7 @@ export const impactApi = createApi({
         getImpact: build.query<Iimpact, string>({
             query(id:string){
                 return{
-                    url:`/impacts/${id}`
+                    url:`/${id}`
                 }
             },
             providesTags:(result, error,id) => [{type:"Impact",id}]
@@ -25,9 +25,12 @@ export const impactApi = createApi({
         addImpact: build.mutation<Iimpact, FormData>({
             query(body){
                 return{
-                    url:'/impacts/post',
+                    url:'/',
                     method:'POST',
-                    body
+                    body,
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+                    }
                 }
             },
             invalidatesTags:[{ type:'Impact', id:'impact'}]
@@ -35,16 +38,30 @@ export const impactApi = createApi({
         deleteImpact: build.mutation<{success:boolean; _id:string},string>({
             query(id){
                 return{
-                    url:`/impacts/delete/${id}`,
+                    url:`/${id}`,
                     method:'DELETE'
                 }
             },
             invalidatesTags:[{type:'Impact', id:'impact'}]
-        })
+        }),
+        editImpact: build.mutation<Iimpact, FormData>({
+            query(body){
+                return{
+                    url:`/${body.get('_id')}`,
+                    method:'PUT',
+                    body,
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+                    }
+                }
+            }
+        }),
     })
 })
 
 export const { useAddImpactMutation, 
     useGetImpactQuery, 
     useDeleteImpactMutation, 
-    useGetImpactsQuery } = impactApi;
+    useGetImpactsQuery,
+    useEditImpactMutation
+} = impactApi;

@@ -1,6 +1,6 @@
 import { Link, useHistory } from 'react-router-dom'
 import { useAddImpactMutation } from '../../slices/impactSlice';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 
 function AddImpact() {
@@ -9,7 +9,7 @@ function AddImpact() {
     const [photo, setPhoto] = useState('');
     const history = useHistory();
 
-    const [addImpact] = useAddImpactMutation();
+    const [addImpact, {isSuccess}] = useAddImpactMutation();
 
     // handle onchange
     const onChangeTitle = (e:any) => setTitle(e.target.value);
@@ -23,10 +23,18 @@ function AddImpact() {
         format.append('description', description);
         format.append('photo', photo);
         addImpact(format);
-        setTitle('');
-        setDescription('');
-        history.push('/impact')
-    }
+    };
+
+    useEffect(() => {
+        (() => {
+            if (isSuccess) {
+                setTitle('');
+                setDescription('');
+                setPhoto('');
+                history.push('/impact');
+            }
+        })();
+    }, [isSuccess, history]);
 
     return (
         <div className="other">

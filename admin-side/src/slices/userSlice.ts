@@ -4,13 +4,13 @@ import { IUser } from '../interfaces/IUser';
 
 export  const userApi = createApi({
     reducerPath:'users',
-    baseQuery: fetchBaseQuery({baseUrl:'http://localhost:3030'}),
+    baseQuery: fetchBaseQuery({baseUrl:'https://uptech-agro.herokuapp.com/api/auth'}),
     tagTypes:['IUser'],
     endpoints: (build) => ({
         getUsers : build.query<IUser, string | void>({
             query(){
                 return{
-                    url:'/auth/users'
+                    url:'/users'
                 }
             },
             providesTags:(result) => [{type:"IUser"}]
@@ -18,12 +18,21 @@ export  const userApi = createApi({
         registerUser: build.mutation<IUser, Partial<IUser>>({
             query(body){
                 return{
-                    url:'/auth/register',
+                    url:'/register',
                     method:"POST",
                     body
                 }
             },
             invalidatesTags: [{type:'IUser',id:'user'}]
+        }),
+        loginUser: build.mutation<{userId: string, token: string}, Partial<{email: string, password: string}>>({
+            query(body){
+                return{
+                    url:'/login',
+                    method:"POST",
+                    body
+                }
+            }
         })
     })
 })
@@ -31,5 +40,6 @@ export  const userApi = createApi({
 
 export const {
     useGetUsersQuery,
-    useRegisterUserMutation
+    useRegisterUserMutation,
+    useLoginUserMutation
 } = userApi;

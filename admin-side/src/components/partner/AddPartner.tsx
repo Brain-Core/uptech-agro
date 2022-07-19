@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useAddPartnerMutation } from '../../slices/partnerSlice';
 
@@ -6,7 +6,7 @@ import { useAddPartnerMutation } from '../../slices/partnerSlice';
 function AddPartner() {
     const [name, setName] = useState('');
     const [photo, setPhoto] = useState('');
-    const [addPartner] = useAddPartnerMutation();
+    const [addPartner, { isSuccess }] = useAddPartnerMutation();
     const history = useHistory();
 
     const onChangeName = (e:any) => setName(e.target.value);
@@ -18,10 +18,17 @@ function AddPartner() {
         format.append('name',name);
         format.append('logo',photo);
         addPartner(format);
-        setName('');
-        history.push('/partner')
 
     }
+
+    useEffect(() =>{
+        (() =>{
+            if(isSuccess){
+                setName('');
+                history.push('/product');
+            }
+        })()
+    }, [isSuccess, history]);
 
 
     return (

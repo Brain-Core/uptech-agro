@@ -7,7 +7,7 @@ function Product() {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        axios.get('https://uptech-admin.herokuapp.com/products')
+        axios.get('/api/products')
         .then(res => setProducts(res.data))
         .catch(err=> console.log(err))
        

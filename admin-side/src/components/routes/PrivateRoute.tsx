@@ -7,7 +7,7 @@ const  PrivateRoute: React.FC<{
         exact: boolean;
     }> = (props) => {
 
-    const condition = true; //localStorage.getItem("authToken");
+    const condition = localStorage.getItem("authToken");
 
     return  condition ? (<Route  path={props.path}  exact={props.exact} component={props.component} />) : 
         (<Redirect  to="/login"  />);

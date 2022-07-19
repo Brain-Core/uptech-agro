@@ -4,13 +4,15 @@ import { IPartner } from '../interfaces/IPartner';
 
 export const partnerApi = createApi({
     reducerPath:'partner',
-    baseQuery: fetchBaseQuery({baseUrl:'http://localhost:3030'}),
+    baseQuery: fetchBaseQuery({baseUrl:'https://uptech-agro.herokuapp.com/api/partner', headers: {
+        'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+    }}),
     tagTypes:['IPartner'],
     endpoints: (build) => ({
         getPartners : build.query<IPartner[],string | void>({
             query(){
                 return {
-                    url:'/partners'
+                    url:'/'
                 }
             },
             providesTags: (result) =>  result ?  [...result.map(({ _id }) => ({ type: 'IPartner', _id } as const)), { type: 'IPartner', id: 'ORDER' }, ]: [{ type: 'IPartner', id: 'ORDER' }],
@@ -18,7 +20,7 @@ export const partnerApi = createApi({
         getPartner: build.query<IPartner, string>({
             query(_id: string){
                 return{
-                    url: `/partners/${_id}`
+                    url: `/${_id}`
                 }
             },
             providesTags:(result, error,_id) => [{type:"IPartner",_id}]
@@ -26,9 +28,12 @@ export const partnerApi = createApi({
         addPartner: build.mutation<IPartner, FormData>({
             query(body){
                 return{
-                    url:'/partners/post',
+                    url:'/',
                     method: 'POST',
-                    body
+                    body,
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+                    }
                 }
             },
             invalidatesTags:[{type: 'IPartner', id:'ORDER'}]
@@ -36,15 +41,27 @@ export const partnerApi = createApi({
         deletePartner: build.mutation<{success:boolean; _id:string}, string>({
             query(_id){
                 return{
-                    url:`/partners/delete/${_id}`,
+                    url:`/delete/${_id}`,
                     method:'DELETE'
                 }
             },
             invalidatesTags:[{type: 'IPartner', id:'ORDER'}]
+        }),
+        editPartner: build.mutation<IPartner, FormData>({
+            query(body){
+                return{
+                    url:`/${body.get('_id')}`,
+                    method:'PUT',
+                    body,
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+                    }
+                }
+            }
         })
     })
 });
 
 
-export const { useGetPartnersQuery, useAddPartnerMutation,useDeletePartnerMutation,useGetPartnerQuery } = partnerApi;
+export const { useGetPartnersQuery, useAddPartnerMutation,useDeletePartnerMutation,useGetPartnerQuery, useEditPartnerMutation } = partnerApi;
 
