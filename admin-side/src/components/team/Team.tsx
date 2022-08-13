@@ -55,7 +55,7 @@ function Team() {
             title:'*',
             render:(row:any)=>(
                 <div>
-                    <Link to={`/editteam/${row.id}`}>
+                    <Link to={`/editteam/${row._id}`}>
                         <EditIcon/>
                     </Link>
                     <DeleteIcon onClick={()=> deleteTeam(row.id)} className="icon-delete"/>

@@ -15,16 +15,18 @@ function EditPartner() {
     const onChangePhoto = (e:any) => setPhoto(e.target.files[0]);
 
     useEffect(()=>{
-        if(!isLoading){
+        if(data?.name){
             setName(`${data?.name}`);
+            data?.logo && setPhoto(data?.logo);
         }
-    },[isLoading, data]);
+    },[data]);
 
     const onSubmitPartner = (e:any) => {
         e.preventDefault();
         const format = new FormData();
         format.append('name',name);
         format.append('_id',id);
+        format.append('logo',photo);
         editPartner(format);  
     };
 
