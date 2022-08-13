@@ -7,7 +7,7 @@ function Team() {
     const [teams, setTeams] = useState([]);
 
     const fetchData = async () =>{
-        const response = await axios.get('https://uptech-admin.herokuapp.com/teams');
+        const response = await axios.get('/api/team');
         setTeams(response.data);
     }
     useEffect(() => {
@@ -24,7 +24,7 @@ function Team() {
                 {teams?.map((team, i)=>(
                     <TeamItem
                     key={i}
-                      img={team.avatar}
+                      img={team.avatar ? team.avatar :  `${axios.defaults.baseURL}/${team.photo}`}
                       name={team.completeName}
                       position={team.position}
                     />

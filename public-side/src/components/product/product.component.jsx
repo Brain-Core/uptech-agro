@@ -24,9 +24,12 @@ function Product() {
             <div className="row">
                 {products?.map((product, i)=>(
                      <ProductItem
-                     key={i}
-                     title={product.namep}
-                     img={product.photo}
+                        key={i}
+                        title={product.namep}
+                        img={
+                            product.photo.startsWith('http') ? product.photo:
+                            `https://uptech-agro.herokuapp.com/${product.photo}`
+                        }
                      />
                 ))}
                

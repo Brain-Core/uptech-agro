@@ -7,7 +7,7 @@ function Partner() {
     const [partners, setPartners] = useState([]);
 
     useEffect(() => {
-        axios.get('https://uptech-admin.herokuapp.com/partners')
+        axios.get('/api/partner')
         .then(res => setPartners(res.data))
         .catch(err=> console.log(err))
        
@@ -23,7 +23,7 @@ function Partner() {
                     {partners.map((partner, i)=>(
                         <PartnerItem
                         key={i}
-                        img={partner.logo}/>
+                        img={partner.logo?.startsWith('http') ? partner.logo : `${axios.defaults.baseURL}/${partner.logo}`}/>
                     ))}
 
                 </div>
