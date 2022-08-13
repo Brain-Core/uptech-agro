@@ -25,14 +25,14 @@ function EditTem() {
     
 
     useEffect(() => {
-       setAddress(`${data?.address}`)
-       setCompleteName(`${data?.completeName}`)
-       setPhone(`${data?.phone}`)
-       setEmail(`${data?.email}`)
-       setPosition(`${data?.position}`)
-    }, [])
+       setAddress(`${data?.address || ''}`)
+       setCompleteName(`${data?.completeName || ''}`)
+       setPhone(`${data?.phone || ''}`)
+       setEmail(`${data?.email || ''}`)
+       setPosition(`${data?.position || ''}`)
+    }, [data])
 
-    const handleSubmition = (e:any) => {
+    const handleSubmition = async(e:any) => {
         e.preventDefault()
         const format = new FormData();
         format.append('completeName',completeName);
@@ -41,7 +41,7 @@ function EditTem() {
         format.append('phone', phone);
         format.append('position', position);
         format.append('avatar', image);
-        axios.put(`http://localhost:3030/teams/edit/${id}`,format);
+        await axios.put(`/api/team/${id}`,format);
         setCompleteName('');
         setAddress('');
         setEmail('');

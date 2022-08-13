@@ -7,7 +7,7 @@ function ImpactItem({img,title, paragraph}) {
                 <div className="block-img">
                     <img 
                     src={img} 
-                    alt=""/>
+                    alt="Icon"/>
                 </div>
                 <div className="block-descript">
                     <h3 className="font-weight-bold">{title}</h3>

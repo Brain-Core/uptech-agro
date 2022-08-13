@@ -5,6 +5,7 @@ import Home from './components/home/home.component';
 import Footer from './components/footer/footer.component';
 
 function App() {
+  
   return (
     <div className="App">
       <HeaderTop/>

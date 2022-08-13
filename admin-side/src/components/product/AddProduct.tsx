@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useAddProductMutation} from '../../slices/productSlice';
 
@@ -6,7 +6,7 @@ import { useAddProductMutation} from '../../slices/productSlice';
 function AddProduct() {
     const [namep, setNamep] = useState('');
     const [photo, setPhoto] = useState('');
-    const [addProduct] = useAddProductMutation();
+    const [addProduct, { isSuccess }] = useAddProductMutation();
     const history = useHistory();
 
     const onChangeNamep = (e:any) => setNamep(e.target.value);
@@ -18,10 +18,16 @@ function AddProduct() {
         format.append('namep', namep);
         format.append('photo', photo);
         addProduct(format);
-        setNamep('');
-        history.push('/product');
+    };
 
-    }
+    useEffect(() =>{
+        (() =>{
+            if(isSuccess){
+                setNamep('');
+                history.push('/product');
+            }
+        })()
+    }, [isSuccess, history]);
 
 
     return (

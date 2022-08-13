@@ -7,7 +7,7 @@ function Product() {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        axios.get('https://uptech-admin.herokuapp.com/products')
+        axios.get('/api/products')
         .then(res => setProducts(res.data))
         .catch(err=> console.log(err))
        
@@ -24,9 +24,12 @@ function Product() {
             <div className="row">
                 {products?.map((product, i)=>(
                      <ProductItem
-                     key={i}
-                     title={product.namep}
-                     img={product.photo}
+                        key={i}
+                        title={product.namep}
+                        img={
+                            product.photo.startsWith('http') ? product.photo:
+                            `https://uptech-agro.herokuapp.com/${product.photo}`
+                        }
                      />
                 ))}
                

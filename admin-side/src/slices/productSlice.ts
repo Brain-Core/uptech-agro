@@ -4,13 +4,15 @@ import { IProdcut } from '../interfaces/IProduct';
 
 export const productApi = createApi({
     reducerPath:'product',
-    baseQuery: fetchBaseQuery({baseUrl:'http://localhost:3030'}),
+    baseQuery: fetchBaseQuery({baseUrl:'https://uptech-agro.herokuapp.com/api/products', headers: {
+        'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+    }}),
     tagTypes:['IProduct'],
     endpoints: (build) => ({
         getProduct: build.query<IProdcut[], number | void>({
             query(){
                 return {
-                    url: '/products'
+                    url: '/'
                 }
             },
             providesTags: (result) =>
@@ -26,7 +28,7 @@ export const productApi = createApi({
         getOneProduct:build.query<IProdcut, string>({
           query(_id:string){
             return {
-              url:`/products/${_id}`
+              url:`/${_id}`
             }
           },
           providesTags: (result, error, _id) => [{ type: 'IProduct', _id }],
@@ -34,9 +36,12 @@ export const productApi = createApi({
         addProduct: build.mutation<IProdcut, Partial<IProdcut> | FormData>({
           query(body){
             return{
-              url:'/products/post',
+              url:'/',
               method:'POST',
-              body
+              body,
+              headers: {
+                'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+              }
             }
           },
           invalidatesTags:[{type: 'IProduct', id:'LIST'}]
@@ -45,7 +50,7 @@ export const productApi = createApi({
           query({_id,...body}){
         
             return{
-              url: `products/edit/${_id}`,
+              url: `/${_id}`,
               method:'PUT',
               body
             }
@@ -55,7 +60,7 @@ export const productApi = createApi({
         deleteProduct: build.mutation<{success:boolean; _id:string}, string>({
           query(_id){
             return {
-              url:`/products/delete/${_id}`,
+              url:`/delete/${_id}`,
               method:'DELETE'
             }
           },

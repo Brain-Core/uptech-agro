@@ -1,46 +1,47 @@
 import './Partner.css';
 import { Link } from 'react-router-dom';
 import { useGetPartnersQuery, useDeletePartnerMutation } from '../../slices/partnerSlice';
-import Table from '../table/Table';
+import {Table} from 'antd';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 
 function Partner() {
-    const {data=[], isLoading, error} = useGetPartnersQuery(); 
+    const {data=[], isLoading } = useGetPartnersQuery(); 
     const [deletePartner] = useDeletePartnerMutation()
 
 
     const columns = [
         {
-            field:'id',
-            headerName:'ID',
+            dataIndex:'id',
+            title:'ID',
             width: 200
         },
         {
-            field:'name',
-            headerName:'Name',
+            dataIndex:'name',
+            title:'Name',
             width: 200
         },
         {
-            field:'logo',
-            headerName:'Logo',
+            title:'Logo',
             width: 200,
-            renderCell: (params: any) => (
+            render: (row: any) => (
                 <div>
-                    <img style={{borderRadius:'50%'}} src={params.row.logo} width={50} height={50}  alt="" />
+                    <img style={{borderRadius:'50%'}} src={
+                        row.logo.startsWith('http') ? row.logo:
+                        `https://uptech-agro.herokuapp.com/${row.logo}`
+                    } width={50} height={50}  alt="" />
                 </div>
             )
         },
         {
-            field:'*',
-            headerName:'*',
+            title:'*',
             width: 200,
-            renderCell:(params:any)=>(
+            render:(row:any)=>(
                 <div>
-                    <Link to={`/editpartner/${params.row.id}`}>
+                    <Link to={`/editpartner/${row._id}`}>
                         <EditIcon/>
                     </Link>
-                    <DeleteIcon onClick={()=> deletePartner(params.row.id)}  className="icon-delete"/>
+                    <DeleteIcon onClick={()=> deletePartner(row._id)}  className="icon-delete"/>
                 </div>
             )
         }
@@ -52,17 +53,11 @@ function Partner() {
                     <h3 className="font-weight-bold">Partners</h3>
                     <Link to='/addpartner'>Add Partner+</Link>
                 </div>
-                {
-                    error ? ( <h3 className="danger">error ...</h3> )
-                    : isLoading ? (
-                        <h3> Loading...</h3>
-                    ) : data ? (
-                        <Table
+                    <Table
                         columns={columns}
-                        data={data}
-                        />
-                    ):null
-                }
+                        dataSource={data}
+                        loading={isLoading}
+                    />
             </div>
         </div>
     )
